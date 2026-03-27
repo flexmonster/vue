@@ -1,0 +1,11 @@
+{
+    "name": "dev-nuxt",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt dev"
+    },
+    "dependencies": {
+        "@flexmonster/vue": "^3.0.0-beta.1",
+        "nuxt": "^3"
+    }
+}
