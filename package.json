@@ -21,9 +21,9 @@
         "build:dev": "vite build"
     },
     "repository": {
-    "type": "git",
-    "url": "https://github.com/flexmonster/vue"
-  },
+        "type": "git",
+        "url": "https://github.com/flexmonster/vue"
+    },
     "peerDependencies": {
         "vue": "^3.5.0"
     },
