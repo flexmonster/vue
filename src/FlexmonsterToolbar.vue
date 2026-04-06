@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { Toolbar } from '@flexmonster/flexmonster'
 
 const props = defineProps({
   state: { type: Object, default: undefined },
@@ -9,9 +10,7 @@ const props = defineProps({
 const wrapperRef = ref(null)
 const toolbar = ref(null)
 
-onMounted(async () => {
-  // Dynamic import is required for SSR - the library accesses browser globals on load
-  const { Toolbar } = await import('@flexmonster/flexmonster')
+onMounted(() => {
   toolbar.value = Toolbar(wrapperRef.value, {
     state: props.state,
     options: props.options,

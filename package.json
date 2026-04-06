@@ -1,16 +1,16 @@
 {
     "name": "@flexmonster/vue",
-    "version": "3.0.0-beta.1",
+    "version": "1.0.1",
     "type": "module",
     "files": [
         "dist"
     ],
-    "main": "./dist/flexmonster.umd.cjs",
-    "module": "./dist/flexmonster.js",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
     "exports": {
         ".": {
-            "import": "./dist/flexmonster.js",
-            "require": "./dist/flexmonster.umd.cjs"
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
         }
     },
     "scripts": {
@@ -33,9 +33,10 @@
         "vue": "^3.5.0"
     },
     "dependencies": {
-        "@flexmonster/flexmonster": "^3.0.0-beta.1"
+        "@flexmonster/flexmonster": "^3.0.0-beta.3"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
-    }
+    },
+    "repository": "https://github.com/flexmonster/vue"
 }

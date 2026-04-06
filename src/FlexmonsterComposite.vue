@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted, watch} from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { Flexmonster } from '@flexmonster/flexmonster'
 
 const props = defineProps({
   state: { type: Object, default: undefined },
@@ -9,21 +10,12 @@ const props = defineProps({
 const wrapperRef = ref(null)
 const flexmonster = ref(null)
 
-onMounted(async () => {
-  // Dynamic import is required for SSR - the library accesses browser globals on load
-  const { Flexmonster } = await import('@flexmonster/flexmonster')
+onMounted(() => {
   flexmonster.value = Flexmonster(wrapperRef.value, {
     state: props.state,
     options: props.options,
   })
 })
-
-watch(() => props.state, async (newState) => {
-  const { Flexmonster } = await import('@flexmonster/flexmonster')
-  flexmonster.value = Flexmonster(wrapperRef.value, {
-    state: newState,
-    options: props.options,
-  })})
 
 onUnmounted(() => {
   if (flexmonster.value) {

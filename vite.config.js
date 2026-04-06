@@ -18,7 +18,8 @@ export default defineConfig(({ mode }) => ({
           lib: {
             entry: resolve(__dirname, 'src/index.js'),
             name: 'Flexmonster',
-            fileName: 'flexmonster',
+            fileName: 'index',
+            formats: ['es', 'cjs'],
           },
           rollupOptions: {
             external: ['vue', '@flexmonster/flexmonster'],
