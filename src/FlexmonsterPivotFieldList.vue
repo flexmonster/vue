@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { PivotFieldList } from '@flexmonster/flexmonster'
 
 const props = defineProps({
   state: { type: Object, default: undefined },
@@ -9,9 +10,7 @@ const props = defineProps({
 const wrapperRef = ref(null)
 const pivotFieldList = ref(null)
 
-onMounted(async () => {
-  // Dynamic import is required for SSR - the library accesses browser globals on load
-  const { PivotFieldList } = await import('@flexmonster/flexmonster')
+onMounted(() => {
   pivotFieldList.value = PivotFieldList(wrapperRef.value, {
     state: props.state,
     options: props.options,

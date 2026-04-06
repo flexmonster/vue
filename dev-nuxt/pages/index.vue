@@ -17,6 +17,11 @@ const toolbarPivotRef = ref(null)
 const fieldListFlatRef = ref(null)
 const fieldListPivotRef = ref(null)
 
+onMounted(async () => {
+  await nextTick()
+  compositeRef.value.flexmonster.openFieldList()
+})
+
 function openFieldListComposite() {
   compositeRef.value.flexmonster.openFieldList()
 }
@@ -100,7 +105,8 @@ const stateFmPivot = {
       <fm-button size="sm" @click="openFieldListComposite">Open Field List</fm-button>
       <fm-button size="sm" @click="setViewType('flat')">Flat view</fm-button>
       <fm-button size="sm" @click="setViewType('pivot')">Pivot view</fm-button>
-      <FlexmonsterComposite ref="compositeRef" :state="stateFmFlexmonster" :options="optionsFmPivot" service-id="main-grid" />
+      <FlexmonsterComposite ref="compositeRef" :state="stateFmFlexmonster" :options="optionsFmPivot"
+        service-id="main-grid" />
 
       <h2 id="flat">Flat</h2>
       <fm-button size="sm" @click="openFieldListFlat">Open field list</fm-button>
@@ -115,10 +121,10 @@ const stateFmPivot = {
       <FlexmonsterToolbar ref="toolbarPivotRef" :state="stateFmPivot" />
       <FlexmonsterPivot ref="pivotRef" :state="stateFmPivot" />
       <FlexmonsterPivotFieldList ref="fieldListPivotRef" :state="stateFmPivot" />
-
-      <h2 id="toolkit">Toolkit elements use example</h2>
-      <fm-button size="sm" :disabled="disabled">Custom Button</fm-button>
-      <fm-selectable-list data-provider="1,2,3" />
     </ClientOnly>
+
+    <h2 id="toolkit">Toolkit elements use example</h2>
+    <fm-button size="sm" :disabled="disabled">Custom Button</fm-button>
+    <fm-selectable-list data-provider="1,2,3" />
   </main>
 </template>
