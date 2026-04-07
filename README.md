@@ -1,4 +1,4 @@
-__Wrapper for Angular__
+__Wrapper for Vue__
 
 Build lib cmd: 
 ```
