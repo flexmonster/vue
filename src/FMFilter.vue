@@ -1,0 +1,59 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { Filter, type IFMFilter, type IFMFilterInputParams, type StateInputParams } from '@flexmonster/flexmonster'
+
+interface Props {
+  state?: StateInputParams
+  options?: IFMFilterInputParams
+  fieldName?: string
+}
+
+const props = defineProps<Props>()
+
+const wrapperRef = ref<HTMLElement | null>(null)
+const filter = ref<IFMFilter | null>(null)
+
+onMounted(() => {
+  filter.value = Filter(wrapperRef.value!, {
+    state: props.state,
+    options: props.options,
+    fieldName: props.fieldName!,
+  })
+})
+
+onUnmounted(() => {
+  if (filter.value) {
+    filter.value.dispose()
+    filter.value = null
+  }
+})
+
+const methodCache = new Map<string | symbol, (...args: any[]) => any>()
+
+const handler: ProxyHandler<IFMFilter> = {
+  get(_, prop) {
+    const instance = filter.value
+    if (!instance || !(prop in instance)) return undefined
+
+    const value = (instance as any)[prop]
+    if (typeof value !== 'function') return value
+
+    if (!methodCache.has(prop)) {
+      methodCache.set(prop, (...args: any[]) =>
+        filter.value
+          ? (filter.value as any)[prop]?.apply(filter.value, args)
+          : undefined
+      )
+    }
+    return methodCache.get(prop)
+  },
+}
+
+defineExpose(new Proxy({} as IFMFilter, handler))
+</script>
+
+<template>
+  <div style="width:100%;height:100%;">
+    <div ref="wrapperRef" class="fm-vue-wrapper" />
+  </div>
+</template>

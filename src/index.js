@@ -1,7 +1,0 @@
-export { default as FlexmonsterComposite } from './FlexmonsterComposite.vue'
-export { default as FlexmonsterFlat } from './FlexmonsterFlat.vue'
-export { default as FlexmonsterPivot } from './FlexmonsterPivot.vue'
-export { default as FlexmonsterToolbar } from './FlexmonsterToolbar.vue'
-export { default as FlexmonsterFlatFieldList } from './FlexmonsterFlatFieldList.vue'
-export { default as FlexmonsterPivotFieldList } from './FlexmonsterPivotFieldList.vue'
-export { default as FlexmonsterFilter } from './FlexmonsterFilter.vue'

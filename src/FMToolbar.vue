@@ -1,0 +1,57 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { Toolbar, type IFMToolbar, type IFMToolbarOptionsInputParams, type StateInputParams } from '@flexmonster/flexmonster'
+
+interface Props {
+  state?: StateInputParams
+  options?: IFMToolbarOptionsInputParams
+}
+
+const props = defineProps<Props>()
+
+const wrapperRef = ref<HTMLElement | null>(null)
+const toolbar = ref<IFMToolbar | null>(null)
+
+onMounted(() => {
+  toolbar.value = Toolbar(wrapperRef.value!, {
+    state: props.state,
+    options: props.options,
+  })
+})
+
+onUnmounted(() => {
+  if (toolbar.value) {
+    toolbar.value.dispose()
+    toolbar.value = null
+  }
+})
+
+const methodCache = new Map<string | symbol, (...args: any[]) => any>()
+
+const handler: ProxyHandler<IFMToolbar> = {
+  get(_, prop) {
+    const instance = toolbar.value
+    if (!instance || !(prop in instance)) return undefined
+
+    const value = (instance as any)[prop]
+    if (typeof value !== 'function') return value
+
+    if (!methodCache.has(prop)) {
+      methodCache.set(prop, (...args: any[]) =>
+        toolbar.value
+          ? (toolbar.value as any)[prop]?.apply(toolbar.value, args)
+          : undefined
+      )
+    }
+    return methodCache.get(prop)
+  },
+}
+
+defineExpose(new Proxy({} as IFMToolbar, handler))
+</script>
+
+<template>
+  <div style="width:100%;height:100%;">
+    <div ref="wrapperRef" class="fm-vue-wrapper" />
+  </div>
+</template>
