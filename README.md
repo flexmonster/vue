@@ -1,39 +1,50 @@
-__Wrapper for Vue__
+# Flexmonster Pivot 3.0 (preview) wrapper for Vue
 
-Build lib cmd: 
-```
-npm run build
-```
-Build lib will be added to a /dist folder.
-Test project start cmds: 
+Website: [prerelease.flexmonster.com](https://prerelease.flexmonster.com/?r=wrap_30_vue)
 
-Vue, no SSR:
-```
-npm start
-```
-OR
-```
-npm run dev
-```
-Nuxt, with SSR:
-```
-npm run dev:ssr
-```
-Custom elements are enabled in vite.config.js
+[![Github Stars](https://img.shields.io/github/stars/flexmonster?style=social)](https://github.com/flexmonster) [![X](https://img.shields.io/twitter/follow/Flexmonster?style=social)](https://x.com/Flexmonster)
 
-Structure:
-| Path | Description |
-|------|-------------|
-| `/dev` | Vue testing grounds using library from dist |
-| `/dev-nuxt` | Nuxt testing grounds, using actually published library |
-| `/src` | Library code |
-| `/dist` | Build output folder |
+Flexmonster 3.0 is an upcoming major update for [Flexmonster Pivot Table & Charts](https://www.flexmonster.com/?r=wrap_30_vue), a powerful JavaScript pivot table component. Check out the [Flexmonster 3.0 roadmap](https://prerelease.flexmonster.com/roadmap?r=wrap_30_vue#current) and keep track of the latest updates.
 
-__TODO:__<br>
-- [x] Test components usage
-- [x] Test API usage
-- [x] Test SSR 
-- [x] Add real `@flexmonster/flexmonster` npm package
+This package is a Flexmonster 3.0 wrapper for [Vue](https://vuejs.org/) applications.
 
-__PUBLISHING:__<br>
-Build from root (`npm run build`), then `npm publish` (don't forget to update the package version)
+## 🛠️ In active development
+
+Flexmonster Pivot 3.0 (preview) is currently in active development and is not production-ready. For production, please use the [Flexmonster 2.9-based Vue wrapper](https://www.npmjs.com/package/vue-flexmonster).
+
+<br/>
+Table of contents:
+
+* [Integration](#integration)  
+* [Sample project](#sample-project)  
+* [Support and feedback](#support-and-feedback)  
+* [License](#license)  
+* [Social media](#social-media)
+
+## Integration
+
+Flexmonster documentation provides a detailed step-by-step guide on [іntegration with Vue](https://prerelease.flexmonster.com/doc/vue/embed-flexmonster-ui/?r=wrap_30_vue).
+
+## Sample project
+
+If you're looking for reference examples, our team has prepared a [Vue pivot grid sample project](https://github.com/flexmonster/vue-sample) with a live Flexmonster 3.0 demo.
+
+## Support and feedback
+
+In case of any issues, visit our [Troubleshooting](https://prerelease.flexmonster.com/doc/vue/troubleshooting/?r=wrap_30_vue) section and look through the list of [common issues](https://prerelease.flexmonster.com/doc/vue/common-client-side-issues/?r=wrap_30_vue).
+
+To share your feedback or ask questions, contact our Tech team by raising a ticket on our [Help Center](https://www.flexmonster.com/help-center/?r=wrap_30_vue).
+
+## License
+
+The Flexmonster 3.0 (preview) wrapper for Vue is distributed under the terms and conditions of the Flexmonster Software License Agreement: [https://www.flexmonster.com/software-license-agreement/](https://www.flexmonster.com/software-license-agreement/?r=wrap_30_vue).
+
+Flexmonster offers a 30-day free trial so you can evaluate our product. Pricing for commercial license models can be found on the [Flexmonster pricing page](https://www.flexmonster.com/pivot-table-editions-and-pricing/?r=wrap_30_vue).
+
+If you need any help with your license, fill out our [Contact form](https://www.flexmonster.com/contact-our-team/?r=wrap_30_vue), and we will get in touch with you.
+
+## Social media
+
+Follow us on social media and stay updated on our development process!
+
+[![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white&logoSize=auto)](https://youtube.com/user/FlexMonsterPivot) [![X](https://img.shields.io/badge/@Flexmonster-black?style=for-the-badge&logo=x&logoColor=white&logoSize=auto)](https://x.com/flexmonster) [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/company/flexmonster) 
