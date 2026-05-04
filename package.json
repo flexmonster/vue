@@ -2,6 +2,7 @@
     "name": "@flexmonster/vue",
     "version": "1.0.2",
     "license": "https://www.flexmonster.com/software-license-agreement/",
+    "homepage": "https://prerelease.flexmonster.com/",
     "description": "Vue wrapper for Flexmonster Pivot",
     "author": {
         "name": "Flexmonster",
@@ -30,7 +31,7 @@
     },
     "repository": "https://github.com/flexmonster/vue",
     "peerDependencies": {
-        "@flexmonster/flexmonster": "^3.0.0-beta.6",
+        "@flexmonster/js": "3.0.0-preview.3.1",
         "vue": "^3.5.0"
     },
     "devDependencies": {
@@ -40,10 +41,5 @@
         "vite-plugin-dts": "^4.0.0",
         "vue": "^3.5.0",
         "vue-tsc": "^2.0.0"
-    },
-    "dependencies": {
-    },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
     }
 }

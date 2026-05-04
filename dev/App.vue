@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import '@flexmonster/flexmonster/flexmonster.css'
-import FlexmonsterComposite from '../src/FlexmonsterComposite.vue'
-import FlexmonsterToolbar from '../src/FlexmonsterToolbar.vue'
-import FlexmonsterFlat from '../src/FlexmonsterFlat.vue'
-import FlexmonsterFlatFieldList from '../src/FlexmonsterFlatFieldList.vue'
-import FlexmonsterPivot from '../src/FlexmonsterPivot.vue'
-import FlexmonsterPivotFieldList from '../src/FlexmonsterPivotFieldList.vue'
+import '@flexmonster/js/flexmonster.css'
+import FMFlexmonster from '../src/FMFlexmonster.vue'
+import FMToolbar from '../src/FMToolbar.vue'
+import FMFlatTable from '../src/FMFlatTable.vue'
+import FMFlatFieldList from '../src/FMFlatFieldList.vue'
+import FMPivotTable from '../src/FMPivotTable.vue'
+import FMPivotFieldList from '../src/FMPivotFieldList.vue'
 
 // Template refs — equivalent of Angular's viewChild
 const compositeRef = ref(null)
@@ -19,29 +19,29 @@ const fieldListPivotRef = ref(null)
 
 // API call helpers
 function openFieldListComposite() {
-  compositeRef.value.flexmonster.openFieldList()
+  compositeRef.value.openFieldList()
 }
 
 function openFieldListFlat() {
-  toolbarFlatRef.value.toolbar.openFieldList()
+  toolbarFlatRef.value.openFieldList()
 }
 
 function openFieldListPivot() {
-  toolbarPivotRef.value.toolbar.openFieldList()
+  toolbarPivotRef.value.openFieldList()
 }
 
 function getCellFlat() {
-  const cell = flatRef.value.flatTable.getCell(0, 0)
+  const cell = flatRef.value.getCell(0, 0)
   alert(`Value of the first cell: ${cell.value}`)
 }
 
 function getCellPivot() {
-  const cell = pivotRef.value.pivotTable.getCell(0, 0)
+  const cell = pivotRef.value.getCell(0, 0)
   alert(`Value of the first cell: ${cell.value}`)
 }
 
 function setViewType(type) {
-  compositeRef.value.flexmonster.setViewType(type)
+  compositeRef.value.setViewType(type)
 }
 
 function changeState() {
@@ -119,23 +119,23 @@ const stateFmPivot = {
     <fm-button size="sm" @click="setViewType('pivot')">Pivot view</fm-button>
     <fm-button size="sm" @click="changeState">Change state</fm-button>
 
-    <FlexmonsterComposite ref="compositeRef" :state="currentStateFmFlexmonster" :options="optionsFmPivot"
+    <FMFlexmonster ref="compositeRef" :state="currentStateFmFlexmonster" :options="optionsFmPivot"
       service-id="main-grid" />
     <h2 id="flat">Flat</h2>
     <fm-button size="sm" @click="openFieldListFlat">Open field list</fm-button>
     <fm-button size="sm" @click="getCellFlat">Get 1st cell</fm-button>
 
-    <FlexmonsterToolbar ref="toolbarFlatRef" :state="stateFmFlat" />
-    <FlexmonsterFlat ref="flatRef" :state="stateFmFlat" />
-    <FlexmonsterFlatFieldList ref="fieldListFlatRef" :state="stateFmFlat" />
+    <FMToolbar ref="toolbarFlatRef" :state="stateFmFlat" />
+    <FMFlatTable ref="flatRef" :state="stateFmFlat" />
+    <FMFlatFieldList ref="fieldListFlatRef" :state="stateFmFlat" />
 
     <h2 id="pivot">Pivot</h2>
     <fm-button size="sm" @click="openFieldListPivot">Open field list</fm-button>
     <fm-button size="sm" @click="getCellPivot">Get 1st cell</fm-button>
 
-    <FlexmonsterToolbar ref="toolbarPivotRef" :state="stateFmPivot" />
-    <FlexmonsterPivot ref="pivotRef" :state="stateFmPivot" />
-    <FlexmonsterPivotFieldList ref="fieldListPivotRef" :state="stateFmPivot" />
+    <FMToolbar ref="toolbarPivotRef" :state="stateFmPivot" />
+    <FMPivotTable ref="pivotRef" :state="stateFmPivot" />
+    <FMPivotFieldList ref="fieldListPivotRef" :state="stateFmPivot" />
 
     <h2 id="toolkit">Toolkit elements use example</h2>
     <fm-button size="sm" :disabled="disabled">Custom Button</fm-button>

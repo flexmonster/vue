@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 
 export default defineNuxtConfig({
     //Import CSS
-    css: ['@flexmonster/flexmonster/flexmonster.css'],
+    css: ['@flexmonster/js/flexmonster.css'],
     ssr: true,
     compatibilityDate: '2026-03-26',
     vue: {
