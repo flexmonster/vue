@@ -1,6 +1,12 @@
 {
     "name": "@flexmonster/vue",
     "version": "1.0.2",
+    "license": "https://www.flexmonster.com/software-license-agreement/",
+    "description": "Vue wrapper for Flexmonster Pivot",
+    "author": {
+        "name": "Flexmonster",
+        "email": "help@flexmonster.com"
+    },
     "type": "module",
     "files": [
         "dist"
