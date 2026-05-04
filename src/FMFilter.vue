@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Filter, type IFMFilter, type IFMFilterInputParams, type StateInputParams } from '@flexmonster/flexmonster'
+import { Filter, type IFMFilter, type IFMFilterInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
@@ -47,13 +47,30 @@ const handler: ProxyHandler<IFMFilter> = {
     }
     return methodCache.get(prop)
   },
+  has(_, prop) {
+    const instance = filter.value
+    return !!instance && prop in instance
+  },
+  ownKeys(_) {
+    const instance = filter.value
+    return instance ? Reflect.ownKeys(instance) : []
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    const instance = filter.value
+    if (!instance || !(prop in instance)) return undefined
+    return (
+      Reflect.getOwnPropertyDescriptor(instance, prop) ?? {
+        configurable: true,
+        enumerable: true,
+        value: (instance as any)[prop],
+      }
+    )
+  },
 }
 
 defineExpose(new Proxy({} as IFMFilter, handler))
 </script>
 
 <template>
-  <div style="width:100%;height:100%;">
-    <div ref="wrapperRef" class="fm-vue-wrapper" />
-  </div>
+  <div ref="wrapperRef" style="width:100%;height:100%;">  </div>
 </template>

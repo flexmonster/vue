@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Flexmonster, type IFMComposite, type IFMCompositeOptionsInputParams, type StateInputParams } from '@flexmonster/flexmonster'
+import { Flexmonster, type IFMFlexmonster, type IFMFlexmonsterOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
-  options?: IFMCompositeOptionsInputParams
+  options?: IFMFlexmonsterOptionsInputParams
 }
 
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const flexmonster = ref<IFMComposite | null>(null)
+const flexmonster = ref<IFMFlexmonster | null>(null)
 
 onMounted(() => {
   flexmonster.value = Flexmonster(wrapperRef.value!, {
@@ -28,7 +28,7 @@ onUnmounted(() => {
 
 const methodCache = new Map<string | symbol, (...args: any[]) => any>()
 
-const handler: ProxyHandler<IFMComposite> = {
+const handler: ProxyHandler<IFMFlexmonster> = {
   get(_, prop) {
     const instance = flexmonster.value
     if (!instance || !(prop in instance)) return undefined
@@ -45,13 +45,30 @@ const handler: ProxyHandler<IFMComposite> = {
     }
     return methodCache.get(prop)
   },
+  has(_, prop) {
+    const instance = flexmonster.value
+    return !!instance && prop in instance
+  },
+  ownKeys(_) {
+    const instance = flexmonster.value
+    return instance ? Reflect.ownKeys(instance) : []
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    const instance = flexmonster.value
+    if (!instance || !(prop in instance)) return undefined
+    return (
+      Reflect.getOwnPropertyDescriptor(instance, prop) ?? {
+        configurable: true,
+        enumerable: true,
+        value: (instance as any)[prop],
+      }
+    )
+  },
 }
 
-defineExpose(new Proxy({} as IFMComposite, handler))
+defineExpose(new Proxy({} as IFMFlexmonster, handler))
 </script>
 
 <template>
-  <div style="width:100%;height:100%;">
-    <div ref="wrapperRef" class="fm-vue-wrapper" />
-  </div>
+  <div ref="wrapperRef" style="width:100%;height:100%;"></div>
 </template>
