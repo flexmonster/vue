@@ -7,6 +7,7 @@ import FMFlatTable from '../src/FMFlatTable.vue'
 import FMFlatFieldList from '../src/FMFlatFieldList.vue'
 import FMPivotTable from '../src/FMPivotTable.vue'
 import FMPivotFieldList from '../src/FMPivotFieldList.vue'
+import FMGroup from '../src/FMGroup.vue'
 
 // Template refs — equivalent of Angular's viewChild
 const compositeRef = ref(null)
@@ -140,6 +141,13 @@ const stateFmPivot = {
     <h2 id="toolkit">Toolkit elements use example</h2>
     <fm-button size="sm" :disabled="disabled">Custom Button</fm-button>
     <fm-selectable-list data-provider="1,2,3" />
+
+    <h2 id="group">FMGroup Example</h2>
+    <FMGroup :state="stateFmFlat">
+      <FMToolbar />
+      <FMFlatTable />
+      <FMFlatFieldList />
+    </FMGroup>
   </main>
 </template>
 

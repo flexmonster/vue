@@ -1,6 +1,6 @@
 {
     "name": "@flexmonster/vue",
-    "version": "3.0.0-preview.3.1",
+    "version": "3.0.0-preview.4.1",
     "license": "https://www.flexmonster.com/software-license-agreement/",
     "homepage": "https://prerelease.flexmonster.com/",
     "description": "Vue wrapper for Flexmonster Pivot",
@@ -31,7 +31,7 @@
     },
     "repository": "https://github.com/flexmonster/vue",
     "peerDependencies": {
-        "@flexmonster/js": "3.0.0-preview.3.1",
+        "@flexmonster/js": "3.0.0-preview.4.1",
         "vue": "^3.5.0"
     },
     "devDependencies": {
