@@ -5,6 +5,7 @@ import { FlatTable, type IFMFlatTable, type IFMFlatTableOptionsInputParams, type
 interface Props {
   state?: StateInputParams
   options?: IFMFlatTableOptionsInputParams
+  name?: string
 }
 
 const props = defineProps<Props>()
@@ -16,6 +17,7 @@ onMounted(() => {
   flatTable.value = FlatTable(wrapperRef.value!, {
     state: props.state,
     options: props.options,
+    name: props.name,
   })
 })
 
