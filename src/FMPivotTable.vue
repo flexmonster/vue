@@ -5,6 +5,7 @@ import { PivotTable, type IFMPivotTable, type IFMPivotTableOptionsInputParams, t
 interface Props {
   state?: StateInputParams
   options?: IFMPivotTableOptionsInputParams
+  name?: string
 }
 
 const props = defineProps<Props>()
@@ -16,6 +17,7 @@ onMounted(() => {
   pivotTable.value = PivotTable(wrapperRef.value!, {
     state: props.state,
     options: props.options,
+    name: props.name,
   })
 })
 
