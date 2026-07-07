@@ -5,6 +5,7 @@ import { Toolbar, type IFMToolbar, type IFMToolbarOptionsInputParams, type State
 interface Props {
   state?: StateInputParams
   options?: IFMToolbarOptionsInputParams
+  for: string
 }
 
 const props = defineProps<Props>()
@@ -13,9 +14,10 @@ const wrapperRef = ref<HTMLElement | null>(null)
 const toolbar = ref<IFMToolbar | null>(null)
 
 onMounted(() => {
+  const options = props.for ? { ...props.options, for: props.for } : props.options;
   toolbar.value = Toolbar(wrapperRef.value!, {
     state: props.state,
-    options: props.options,
+    options: options,
   })
 })
 
