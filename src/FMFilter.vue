@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Filter, type IFMFilter, type IFMFilterInputParams, type StateInputParams } from '@flexmonster/js'
+import { Filter, type IFMFilter, type IFilterOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
-  options?: IFMFilterInputParams
+  options?: IFilterOptionsInputParams
   fieldName?: string
 }
 
