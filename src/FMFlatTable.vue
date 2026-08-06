@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { FlatTable, type IFMFlatTable, type IFMFlatTableOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
   options?: IFMFlatTableOptionsInputParams
+  name?: string
 }
 
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const flatTable = ref<IFMFlatTable | null>(null)
+const flatTable = shallowRef<IFMFlatTable | null>(null)
 
 onMounted(() => {
-  flatTable.value = FlatTable(wrapperRef.value!, {
+  flatTable.value = markRaw(FlatTable(wrapperRef.value!, {
     state: props.state,
     options: props.options,
-  })
+    name: props.name,
+  }));
 })
 
 onUnmounted(() => {

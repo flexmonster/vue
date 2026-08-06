@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Filter, type IFMFilter, type IFMFilterInputParams, type StateInputParams } from '@flexmonster/js'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
+import { Filter, type IFMFilter, type IFilterOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
-  options?: IFMFilterInputParams
+  options?: IFilterOptionsInputParams
   fieldName?: string
 }
 
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const filter = ref<IFMFilter | null>(null)
+const filter = shallowRef<IFMFilter | null>(null)
 
 onMounted(() => {
-  filter.value = Filter(wrapperRef.value!, {
+  filter.value = markRaw(Filter(wrapperRef.value!, {
     state: props.state,
     options: props.options,
     fieldName: props.fieldName!,
-  })
+  }));
 })
 
 onUnmounted(() => {

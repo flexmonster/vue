@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { PivotTable, type IFMPivotTable, type IFMPivotTableOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
   options?: IFMPivotTableOptionsInputParams
+  name?: string
 }
 
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const pivotTable = ref<IFMPivotTable | null>(null)
+const pivotTable = shallowRef<IFMPivotTable | null>(null)
 
 onMounted(() => {
-  pivotTable.value = PivotTable(wrapperRef.value!, {
+  pivotTable.value = markRaw(PivotTable(wrapperRef.value!, {
     state: props.state,
     options: props.options,
-  })
+    name: props.name,
+  }));
 })
 
 onUnmounted(() => {

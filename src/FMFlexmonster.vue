@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { Flexmonster, type IFMFlexmonster, type IFMFlexmonsterOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const flexmonster = ref<IFMFlexmonster | null>(null)
+const flexmonster = shallowRef<IFMFlexmonster | null>(null)
 
 onMounted(() => {
-  flexmonster.value = Flexmonster(wrapperRef.value!, {
+  flexmonster.value = markRaw(Flexmonster(wrapperRef.value!, {
     state: props.state,
     options: props.options,
-  })
+  }));
 })
 
 onUnmounted(() => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { FlatFieldList, type IFMFlatFieldList, type IFMFlatFieldListOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const flatFieldList = ref<IFMFlatFieldList | null>(null)
+const flatFieldList = shallowRef<IFMFlatFieldList | null>(null)
 
 onMounted(() => {
-  flatFieldList.value = FlatFieldList(wrapperRef.value!, {
+  flatFieldList.value = markRaw(FlatFieldList(wrapperRef.value!, {
     state: props.state,
     options: props.options,
-  })
+  }));
 })
 
 onUnmounted(() => {

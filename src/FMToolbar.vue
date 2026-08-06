@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { Toolbar, type IFMToolbar, type IFMToolbarOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
   state?: StateInputParams
   options?: IFMToolbarOptionsInputParams
+  for: string
 }
 
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const toolbar = ref<IFMToolbar | null>(null)
+const toolbar = shallowRef<IFMToolbar | null>(null)
 
 onMounted(() => {
-  toolbar.value = Toolbar(wrapperRef.value!, {
+  const options = props.for ? { ...props.options, for: props.for } : props.options;
+  toolbar.value = markRaw(Toolbar(wrapperRef.value!, {
     state: props.state,
-    options: props.options,
-  })
+    options: options,
+  }));
 })
 
 onUnmounted(() => {

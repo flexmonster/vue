@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { PivotFieldList, type IFMPivotFieldList, type IFMPivotFieldListOptionsInputParams, type StateInputParams } from '@flexmonster/js'
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
 const props = defineProps<Props>()
 
 const wrapperRef = ref<HTMLElement | null>(null)
-const pivotFieldList = ref<IFMPivotFieldList | null>(null)
+const pivotFieldList = shallowRef<IFMPivotFieldList | null>(null)
 
 onMounted(() => {
-  pivotFieldList.value = PivotFieldList(wrapperRef.value!, {
+  pivotFieldList.value = markRaw(PivotFieldList(wrapperRef.value!, {
     state: props.state,
     options: props.options,
-  })
+  }));
 })
 
 onUnmounted(() => {
