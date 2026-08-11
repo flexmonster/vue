@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
+import { computed, inject, ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { Toolbar, type IFMToolbar, type IFMToolbarOptionsInputParams, type StateInputParams } from '@flexmonster/js'
+import { FMStateContext } from './FMStateContext'
 
 interface Props {
   state?: StateInputParams
@@ -10,13 +11,16 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const groupState = inject(FMStateContext, undefined)
+const state = computed(() => props.state ?? groupState?.value)
+
 const wrapperRef = ref<HTMLElement | null>(null)
 const toolbar = shallowRef<IFMToolbar | null>(null)
 
 onMounted(() => {
   const options = props.for ? { ...props.options, for: props.for } : props.options;
   toolbar.value = markRaw(Toolbar(wrapperRef.value!, {
-    state: props.state,
+    state: state.value,
     options: options,
   }));
 })

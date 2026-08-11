@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
+import { computed, inject, ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { PivotTable, type IFMPivotTable, type IFMPivotTableOptionsInputParams, type StateInputParams } from '@flexmonster/js'
+import { FMStateContext } from './FMStateContext'
 
 interface Props {
   state?: StateInputParams
@@ -10,12 +11,15 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const groupState = inject(FMStateContext, undefined)
+const state = computed(() => props.state ?? groupState?.value)
+
 const wrapperRef = ref<HTMLElement | null>(null)
 const pivotTable = shallowRef<IFMPivotTable | null>(null)
 
 onMounted(() => {
   pivotTable.value = markRaw(PivotTable(wrapperRef.value!, {
-    state: props.state,
+    state: state.value,
     options: props.options,
     name: props.name,
   }));

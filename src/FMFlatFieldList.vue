@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
+import { computed, inject, ref, shallowRef, markRaw, onMounted, onUnmounted } from 'vue'
 import { FlatFieldList, type IFMFlatFieldList, type IFMFlatFieldListOptionsInputParams, type StateInputParams } from '@flexmonster/js'
+import { FMStateContext } from './FMStateContext'
 
 interface Props {
   state?: StateInputParams
@@ -9,12 +10,15 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const groupState = inject(FMStateContext, undefined)
+const state = computed(() => props.state ?? groupState?.value)
+
 const wrapperRef = ref<HTMLElement | null>(null)
 const flatFieldList = shallowRef<IFMFlatFieldList | null>(null)
 
 onMounted(() => {
   flatFieldList.value = markRaw(FlatFieldList(wrapperRef.value!, {
-    state: props.state,
+    state: state.value,
     options: props.options,
   }));
 })
