@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => ({
             formats: ['es', 'cjs'],
           },
           rollupOptions: {
-            external: ['vue', '@flexmonster/flexmonster'],
+            external: ['vue', '@flexmonster/js'],
             output: {
               exports: 'named',
               globals: { vue: 'Vue' },
