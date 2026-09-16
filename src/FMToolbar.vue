@@ -6,7 +6,7 @@ import { FMStateContext } from './FMStateContext'
 interface Props {
   state?: StateInputParams
   options?: IFMToolbarOptionsInputParams
-  for: string
+  for?: string
 }
 
 const props = defineProps<Props>()
