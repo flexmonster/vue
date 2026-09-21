@@ -1,7 +1,7 @@
-import { eCharts, type IFMEChartsInputParams, type IFMECharts } from '@flexmonster/js'
+import { ECharts, type IFMEChartsInputParams, type IFMECharts } from '@flexmonster/js'
 
 export const FMCharts = {
-  eCharts(params: IFMEChartsInputParams): IFMECharts {
-    return eCharts(params)
+  ECharts(params: IFMEChartsInputParams): IFMECharts {
+    return ECharts(params)
   },
 }
